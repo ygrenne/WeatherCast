@@ -7,7 +7,7 @@ namespace Weather.Extensions
     {
         public static string ToQueryString(this IDictionary<string, string> dictionary)
         {
-            return dictionary.Aggregate("", (current, dict) => current + $"{dict.Key}={dict.Value}&");
+            return dictionary.Aggregate("", (current, dict) => current + $"{dict.Key}={dict.Value}&").TrimEnd('&');
         }
     }
 }

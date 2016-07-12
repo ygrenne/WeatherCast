@@ -19,15 +19,15 @@
 <div class="row">
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="tempTab">
-            @foreach(var _ in Model.List.Select((list, indx) => new {list, isActive = indx == 0}))
+            @foreach(var list in Model.List.Select((detail, indx) => new {detail, isActive = indx == 0}))
             {
-                <li class="@(_.isActive ? "active" : "")">
-                    <a data-target="#@_.list.Dt" data-toggle="tab">
-                        <div>@_.list.Date.ToShortDateString()</div>
-                        <div><img src="http://openweathermap.org/img/w/@(_.list.Weather[0].Icon).png" alt="" /></div>
+                <li class="@(list.isActive ? "active" : "")">
+                    <a data-target="#@list.detail.Dt" data-toggle="tab">
+                        <div>@list.detail.Date.ToShortDateString()</div>
+                        <div><img src="http://openweathermap.org/img/w/@(list.detail.Weather[0].Icon).png" alt="" /></div>
                         <div class="temperature">
-                            <div>Макс. <span>@_.list.Temp.Max°</span> </div>
-                            <div>Мін. <span>@_.list.Temp.Min°</span> </div>
+                            <div>Макс. <span>@list.detail.Temp.Max°</span> </div>
+                            <div>Мін. <span>@list.detail.Temp.Min°</span> </div>
                         </div>
                     </a>
                 </li>
@@ -35,28 +35,28 @@
         </ul>
         <div class="row">
             <div class="tab-content">
-                @for (int i = 0; i < Model.List.Count; i++)
+                @foreach (var list in Model.List.Select((detail, indx) => new { detail, isActive = indx == 0 }))
                 {
-                    <div class="tab-pane @(i == 0 ? "active" : "")" id="@Model.List[i].Dt">
+                    <div class="tab-pane @(list.isActive ? "active" : "")" id="@list.detail.Dt">
                         <div class="margin-top-25">
                             <div class="col-md-6">
                                 <table class="table table-striped table-bordered tempTable">
                                     <tbody>
                                     <tr>
                                         <td><img src="/Icons/night.png" alt="Ніч" /> Ніч</td>
-                                        <td>@Model.List[i].Temp.Night °C</td>
+                                        <td>@list.detail.Temp.Night °C</td>
                                     </tr>
                                     <tr>
                                         <td><img src="/Icons/morn.png" alt="Ранок" /> Ранок</td>
-                                        <td>@Model.List[i].Temp.Morn °C</td>
+                                        <td>@list.detail.Temp.Morn °C</td>
                                     </tr>
                                     <tr>
                                         <td><img src="/Icons/day.png" alt="День" /> День</td>
-                                        <td>@Model.List[i].Temp.Day °C</td>
+                                        <td>@list.detail.Temp.Day °C</td>
                                     </tr>
                                     <tr>
                                         <td><img src="/Icons/eve.png" alt="Вечір" /> Вечір</td>
-                                        <td>@Model.List[i].Temp.Eve °C</td>
+                                        <td>@list.detail.Temp.Eve °C</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -66,19 +66,19 @@
                                     <tbody>
                                         <tr>
                                             <td><img src="/Icons/wind.png" alt="Вітер" /> Вітер</td>
-                                            <td>@Model.List[i].Speed м/сек</td>
+                                            <td>@list.detail.Speed м/сек</td>
                                         </tr>
                                         <tr>
                                             <td><img src="/Icons/clouds.png" alt="Хмарність" /> Хмарність</td>
-                                            <td>@Model.List[i].Clouds %</td>
+                                            <td>@list.detail.Clouds %</td>
                                         </tr>
                                         <tr>
                                             <td><img src="/Icons/humidity.png" alt="Вологість" /> Вологість</td>
-                                            <td>@Model.List[i].Humidity %</td>
+                                            <td>@list.detail.Humidity %</td>
                                         </tr>
                                         <tr>
                                             <td><img src="/Icons/pressure.png" alt="Тиск" /> Тиск</td>
-                                            <td>@Model.List[i].Pressure мм</td>
+                                            <td>@list.detail.Pressure мм</td>
                                         </tr>
                                     </tbody>
                                 </table>

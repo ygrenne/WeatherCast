@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Weather.Services;
 
 namespace Weather.Controllers
@@ -23,7 +24,7 @@ namespace Weather.Controllers
 
         public async Task<ActionResult> Detail(string city, int cnt = 1)
         {
-            if (city == null)
+            if (city.IsNullOrWhiteSpace())
             {
                 return RedirectToAction("Index");
             }
