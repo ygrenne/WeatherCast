@@ -1,16 +1,14 @@
-﻿@model Weather.Models.WeatherDaily.RootObject
-@Html.Partial("~/Views/Weather/_Search.cshtml", ViewData["cities"])
+﻿@using Weather.Models.City
+@model Weather.Models.WeatherDaily.RootObject
+
+@Html.Partial("~/Views/Weather/_Search.cshtml", (IEnumerable<DefaultCityModel>)ViewBag.DefaultCities)
 @{
     ViewBag.Title = "у місті " + Model.City.Name;
 }
 
 <div class="pull-right">
-    <button class="btn btn-default">
-        @Html.ActionLink("На 3 дня", "Detail", "Weather", new { city = Model.City.Name, cnt = 3 }, null)
-    </button>
-    <button class="btn btn-default">
-        @Html.ActionLink("На 7 днів", "Detail", "Weather", new { city = Model.City.Name, cnt = 7 }, null)
-    </button>
+        @Html.ActionLink("На 3 дня", "Detail", "Weather", new { city = Model.City.Name, cnt = 3 }, new { @class = "btn btn-default" })
+        @Html.ActionLink("На 7 днів", "Detail", "Weather", new { city = Model.City.Name, cnt = 7 }, new { @class = "btn btn-default" })
 </div>
 <h2>
     Погода у місті @Model.City.Name
@@ -19,7 +17,7 @@
 <div class="row">
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="tempTab">
-            @foreach(var list in Model.List.Select((detail, indx) => new {detail, isActive = indx == 0}))
+            @foreach (var list in Model.List.Select((detail, indx) => new { detail, isActive = indx == 0 }))
             {
                 <li class="@(list.isActive ? "active" : "")">
                     <a data-target="#@list.detail.Dt" data-toggle="tab">
@@ -42,22 +40,22 @@
                             <div class="col-md-6">
                                 <table class="table table-striped table-bordered tempTable">
                                     <tbody>
-                                    <tr>
-                                        <td><img src="/Icons/night.png" alt="Ніч" /> Ніч</td>
-                                        <td>@list.detail.Temp.Night °C</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/Icons/morn.png" alt="Ранок" /> Ранок</td>
-                                        <td>@list.detail.Temp.Morn °C</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/Icons/day.png" alt="День" /> День</td>
-                                        <td>@list.detail.Temp.Day °C</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="/Icons/eve.png" alt="Вечір" /> Вечір</td>
-                                        <td>@list.detail.Temp.Eve °C</td>
-                                    </tr>
+                                        <tr>
+                                            <td><img src="/Icons/night.png" alt="Ніч" /> Ніч</td>
+                                            <td>@list.detail.Temp.Night °C</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/Icons/morn.png" alt="Ранок" /> Ранок</td>
+                                            <td>@list.detail.Temp.Morn °C</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/Icons/day.png" alt="День" /> День</td>
+                                            <td>@list.detail.Temp.Day °C</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/Icons/eve.png" alt="Вечір" /> Вечір</td>
+                                            <td>@list.detail.Temp.Eve °C</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -90,6 +88,5 @@
         </div>
     </div>
 </div>
-
 
 

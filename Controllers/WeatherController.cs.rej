@@ -1,0 +1,29 @@
+diff a/Controllers/WeatherController.cs b/Controllers/WeatherController.cs	(rejected hunks)
+@@ -1,6 +1,8 @@
+-﻿using System.Threading.Tasks;
++﻿using System.Linq;
++using System.Threading.Tasks;
+ using System.Web.Mvc;
+ using Microsoft.Ajax.Utilities;
++using Weather.Context;
+ using Weather.Services;
+ 
+ namespace Weather.Controllers
+@@ -26,11 +29,17 @@ namespace Weather.Controllers
+         {
+             if (city.IsNullOrWhiteSpace())
+             {
++                //db.Entry(cityToUpdate).
+                 return RedirectToAction("Index");
+             }
+ 
+             ViewData["cities"] = weatherService.DefaultCities;
+ 
++            var cityToUpdate = db.Cities.FirstOrDefault(c => c.Name == city);
++
++            if (cityToUpdate != null) cityToUpdate.ViewCount += 1;
++            await db.SaveChangesAsync();
++
+             var info = await weatherService.GetByCityNameAsync(city, cnt);
+ 
+             return View(info);

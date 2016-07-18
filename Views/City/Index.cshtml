@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Weather.Models.City.CityViewModel>
+
+@{
+    ViewBag.Title = " - усі міста";
+}
+
+<h2>Міста</h2>
+
+<p>
+    @Html.ActionLink("Додати нове", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UaName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastVisited)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UaName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastVisited)
+        </td>
+        <td>
+            @Html.ActionLink("Редагувати", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Видалити", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

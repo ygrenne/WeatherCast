@@ -1,1 +1,2 @@
-﻿@Html.Partial("~/Views/Weather/_Search.cshtml")
+﻿@using Weather.Models.City
+@Html.Partial("~/Views/Weather/_Search.cshtml", (IEnumerable<DefaultCityModel>)ViewBag.DefaultCities)

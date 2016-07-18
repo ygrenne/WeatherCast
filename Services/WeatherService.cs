@@ -11,15 +11,6 @@ namespace Weather.Services
     {
         private readonly IOpenWeatherQueryBuilder queryBuilder;
 
-        IReadOnlyList<WeatherDaily.City> IWeatherService.DefaultCities => new[]
-        {
-            new WeatherDaily.City {UaName = "Львів", Name = "Lviv"},
-            new WeatherDaily.City {UaName = "Київ", Name = "Kyiv"},
-            new WeatherDaily.City {UaName = "Харків", Name = "Kharkiv"},
-            new WeatherDaily.City {UaName = "Дніпропетровськ", Name = "Dnipropetrovsk"},
-            new WeatherDaily.City {UaName = "Одеса", Name = "Odessa"}
-        };
-
         public WeatherService(IOpenWeatherQueryBuilder queryBuilder)
         {
             this.queryBuilder = queryBuilder;
